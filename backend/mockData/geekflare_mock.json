@@ -1,0 +1,141 @@
+{
+  "timestamp": 1664032886370,
+  "apiStatus": "success",
+  "apiCode": 200,
+  "meta": {
+    "url": "https://geekflare.com",
+    "test": {
+      "id": "zo66p43l03t0gei7x1bwztvlo4d6cppl"
+    }
+  },
+  "data": {
+    "A": [
+      {
+        "address": "172.66.43.163",
+        "ttl": 300
+      },
+      {
+        "address": "172.66.40.93",
+        "ttl": 300
+      }
+    ],
+    "AAAA": [
+      {
+        "address": "2606:4700:3108::ac42:2ba3",
+        "ttl": 300
+      },
+      {
+        "address": "2606:4700:3108::ac42:285d",
+        "ttl": 300
+      }
+    ],
+    "CAA": [
+      {
+        "critical": 0,
+        "issuewild": "letsencrypt.org"
+      },
+      {
+        "critical": 0,
+        "issuewild": "digicert.com; cansignhttpexchanges=yes"
+      },
+      {
+        "critical": 0,
+        "issuewild": "comodoca.com"
+      },
+      {
+        "critical": 0,
+        "issue": "pki.goog; cansignhttpexchanges=yes"
+      },
+      {
+        "critical": 0,
+        "issue": "letsencrypt.org"
+      },
+      {
+        "critical": 0,
+        "issue": "digicert.com; cansignhttpexchanges=yes"
+      },
+      {
+        "critical": 0,
+        "issue": "comodoca.com"
+      },
+      {
+        "critical": 0,
+        "issue": "awstrust.com"
+      },
+      {
+        "critical": 0,
+        "issue": "amazontrust.com"
+      },
+      {
+        "critical": 0,
+        "issue": "amazonaws.com"
+      },
+      {
+        "critical": 0,
+        "issue": "amazon.com"
+      },
+      {
+        "critical": 0,
+        "issuewild": "pki.goog; cansignhttpexchanges=yes"
+      }
+    ],
+    "MX": [
+      {
+        "exchange": "alt2.aspmx.l.google.com",
+        "priority": 5
+      },
+      {
+        "exchange": "aspmx.l.google.com",
+        "priority": 1
+      },
+      {
+        "exchange": "alt3.aspmx.l.google.com",
+        "priority": 10
+      },
+      {
+        "exchange": "alt4.aspmx.l.google.com",
+        "priority": 10
+      },
+      {
+        "exchange": "alt1.aspmx.l.google.com",
+        "priority": 5
+      }
+    ],
+    "NS": [
+      "olga.ns.cloudflare.com",
+      "todd.ns.cloudflare.com"
+    ],
+    "SOA": {
+      "nsname": "olga.ns.cloudflare.com",
+      "hostmaster": "dns.cloudflare.com",
+      "serial": 2289240117,
+      "refresh": 10000,
+      "retry": 2400,
+      "expire": 604800,
+      "minttl": 3600
+    },
+    "TXT": [
+      [
+        "Sendinblue-code:642dd9bdd25d0e63013fbd24729e722c"
+      ],
+      [
+        "yandex-verification: 42f25bad396e79f5"
+      ],
+      [
+        "v=spf1 include:_spf.mlsend.com include:_spf.google.com include:mailgun.org include:zcsend.net include:spf.sendinblue.com mx -all"
+      ],
+      [
+        "google-site-verification=MRSwa454qay1S6pwwixzoiZl08kfJfkhiQIslhok3-A"
+      ],
+      [
+        "google-site-verification=7QXbgb492Y5NVyWzSAgAScfUV3XIAGTKKZfdpCvcaGM"
+      ],
+      [
+        "ahrefs-site-verification_8eefbd2fe43a8728b6fd14a393e2aff77b671e41615d2c1c6fc365ec33a4d6d0"
+      ],
+      [
+        "admitad-verification: 91fa860493"
+      ]
+    ]
+  }
+}
