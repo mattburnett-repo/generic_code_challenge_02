@@ -1,5 +1,5 @@
 
-dns_api_url="https://geekflare.com/api/dnsrecord"
-dns_api_key=
+DNS_API_URL="https://geekflare.com/api/dnsrecord"
+DNS_API_KEY=""
 
-client_url="http://localhost:3000"
+CLIENT_URL="http://localhost:3000"
