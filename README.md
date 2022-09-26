@@ -15,7 +15,7 @@ The required modules for both the frontend and backend must first be installed.
 ### Backend
 After cloning the repo, you can install the backend, compile it to TypeScript, and start the backend.
 
-First, change to the `coding-challenge-mattburnett-repo`directory
+First, change to the `coding-challenge-mattburnett-repo` directory
 ```sh
 cd coding-challenge-mattburnett-repo 
 ```
@@ -27,7 +27,7 @@ yarn
 ```
 Copy the .sample.env file
 ```sh
-cp .sample.env .env
+cp .sample-env .env
 ```
 
 The backend uses a 3rd party API to retrieve DNS information for a given domain. 
@@ -47,7 +47,7 @@ The backend runs from code in the `dist` folder
 
 If you want to start the backend in development mode (using nodemon)
 ```sh
-yarn dev:start
+yarn start:dev
 ```
 
 To start the backend without nodemon

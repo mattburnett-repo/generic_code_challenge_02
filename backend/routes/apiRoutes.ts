@@ -173,9 +173,9 @@ module.exports = (app: any) => {
     //  NOTE: expects Body / x-www-form-urlencoded from UI / client
     var config = {
       method: "post",
-      url: process.env.dns_api_url,
+      url: process.env.DNS_API_URL,
       headers: {
-        "x-api-key": process.env.dns_api_key,
+        "x-api-key": process.env.DNS_API_KEY,
         "Content-Type": "application/json",
       },
       data: data,

@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "node ./dist/index.js",
-    "dev:start": "nodemon ./dist/index.js"
+    "start:dev": "nodemon ./dist/index.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
