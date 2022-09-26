@@ -10,10 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var express = require('express');
 var router = express.Router();
-const axios = require('axios');
-const mockResponse = require('../../mockData/baobab_mock.json');
+var axios = require('axios');
+// const mockResponse: ApiResponse = require('../../mockData/baobab_mock.json')
 module.exports = (app) => {
     app.use('/', router);
+    // calculateRisk() is really long and should be in a separate file
     const calculateRisk = (apiRecord) => {
         let tempRiskLevel = 3;
         let tempHasEmail = false;
@@ -21,11 +22,12 @@ module.exports = (app) => {
         let tempHasDKIM = false;
         let tempHasDMARC = false;
         let tempRiskLevelDesc = '';
-        //  check for email
         if (apiRecord.data.MX.length > 0) {
             try {
                 apiRecord.data.MX.forEach(elem => {
-                    if (elem.exchange.includes('google.com')) {
+                    let theStr = elem.exchange;
+                    //  TODO: this could be done more cleanly
+                    if (theStr.includes('google.com') || theStr.includes('protonmail') || theStr.includes('Outlook')) {
                         tempHasEmail = true;
                         tempRiskLevel -= 1;
                         throw new Error("End MX loop");
@@ -33,6 +35,7 @@ module.exports = (app) => {
                 });
             }
             catch (e) {
+                // catch error to break out of forEach()
                 // console.log(e.message)
             }
         }
@@ -40,8 +43,8 @@ module.exports = (app) => {
         if (apiRecord.data.TXT.length > 0) {
             try {
                 apiRecord.data.TXT.forEach(elem => {
+                    console.log(elem[0]);
                     if (elem[0].includes('v=spf')) {
-                        console.log('SPF');
                         tempHasSPF = true;
                         tempRiskLevel -= 1;
                         throw new Error("End SPF check");
@@ -49,15 +52,16 @@ module.exports = (app) => {
                 });
             }
             catch (e) {
-                //  console.log(e.message)
+                // catch error to break out of forEach()
+                // console.log(e)
             }
         }
         // check for DKIM
+        //  TODO: combine with SPF test, since we're just looping though TXT records
         if (apiRecord.data.TXT.length > 0) {
             try {
                 apiRecord.data.TXT.forEach(elem => {
                     if (elem[0].includes('v=DKIM')) {
-                        console.log('DKIM');
                         tempHasDKIM = true;
                         // tempRiskLevel -= 1
                         throw new Error("End DKIM check");
@@ -65,6 +69,7 @@ module.exports = (app) => {
                 });
             }
             catch (e) {
+                // catch error to break out of forEach()
                 //  console.log(e.message)
             }
         }
@@ -72,23 +77,23 @@ module.exports = (app) => {
         //    since DMARC can't exist without SPR and DKIM, let's assume
         //      that a DNS record with SPF and DKIM also has DMARC
         // TODO: find API that returns SPF and DMARC info in one record
-        if (tempHasSPF && tempHasSPF) {
-            console.log(tempHasSPF, tempHasSPF);
+        if (tempHasSPF && tempHasDKIM) {
             tempHasDMARC = true;
             tempRiskLevel -= 1;
         }
+        //  this could be typed better, maybe an enum
         switch (tempRiskLevel) {
             case (3):
-                tempRiskLevelDesc = 'Risk level is high (3).';
+                tempRiskLevelDesc = 'Risk level is high.';
                 break;
             case (2):
-                tempRiskLevelDesc = 'Risk level is moderately high (2).';
+                tempRiskLevelDesc = 'Risk level is moderately high.';
                 break;
             case (1):
-                tempRiskLevelDesc = 'Risk level is moderately low (1).';
+                tempRiskLevelDesc = 'Risk level is moderately low.';
                 break;
             case (0):
-                tempRiskLevelDesc = 'Risk level is low (0).';
+                tempRiskLevelDesc = 'Risk level is low.';
                 break;
             default:
                 tempRiskLevelDesc = 'Cannot determine risk level with given information.';
@@ -99,27 +104,34 @@ module.exports = (app) => {
             riskLevelDesc: tempRiskLevelDesc,
             hasMatureEmail: tempHasEmail,
             hasDMARC: tempHasDMARC,
-            hasSPF: tempHasDKIM
+            hasSPF: tempHasSPF,
+            hasDKIM: tempHasDKIM
         };
-        console.log('result: ', result);
+        // console.log('result: ', result)
         return result;
     };
     router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        let theDomain = req.body.domainName;
-        // var options = {
-        //   'method': 'POST',
-        //   'url': process.env.dns_api_url,
-        //   'headers': {
-        //     'X-API-KEY': process.env.dns_api_key,
-        //     'Content-Type': 'application/json'
-        //   },
-        //    'body': {
-        //   "url": req.body.domainName
-        // }
-        // };
-        // const result = await axios(options);
-        // let assessedRisk: RiskAssessment = calculateRisk(mockResponse)
-        let assessedRisk = calculateRisk(mockResponse);
-        res.status(200).json(assessedRisk);
+        let data = JSON.stringify({
+            url: req.body.domainName,
+            types: ["A", "MX", "NS", "SOA", "TXT"],
+        });
+        //  NOTE: expects Body / x-www-form-urlencoded from UI / client
+        var config = {
+            method: "post",
+            url: process.env.dns_api_url,
+            headers: {
+                "x-api-key": process.env.dns_api_key,
+                "Content-Type": "application/json",
+            },
+            data: data,
+        };
+        try {
+            const result = yield axios(config);
+            let assessedRisk = calculateRisk(result.data);
+            res.status(200).json(assessedRisk);
+        }
+        catch (err) {
+            res.status(err.response.data.apiCode).json({ 'ERROR: ': err.response.data.message + ' Looked for domain: ' + err.response.data.meta.url });
+        }
     }));
 };
