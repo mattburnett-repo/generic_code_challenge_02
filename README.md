@@ -15,6 +15,11 @@ The required modules for both the frontend and backend must first be installed.
 ### Backend
 After cloning the repo, you can install the backend, compile it to TypeScript, and start the backend.
 
+First, change to the `coding-challenge-mattburnett-repo`directory
+```sh
+cd coding-challenge-mattburnett-repo 
+```
+
 Install the backend modules:
 ```sh
 cd backend

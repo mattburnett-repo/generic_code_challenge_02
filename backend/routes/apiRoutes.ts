@@ -92,7 +92,6 @@ module.exports = (app: any) => {
     if (apiRecord.data.TXT.length > 0) {
       try {
         apiRecord.data.TXT.forEach(elem => {
-          console.log(elem[0])
           if (elem[0].includes('v=spf')) {
             tempHasSPF = true
             tempRiskLevel -= 1
@@ -184,12 +183,11 @@ module.exports = (app: any) => {
 
     try {
       const result = await axios(config)
-
       let assessedRisk: RiskAssessment = calculateRisk(result.data)
 
       res.status(200).json(assessedRisk)
     } catch (err: any) {
-      res.status(err.response.data.apiCode).json({ 'ERROR: ': err.response.data.message + ' Looked for domain: ' + err.response.data.meta.url })
+      res.status(err.response.data.apiCode).json({ "message": err.response.data })
     }
   })
 }
