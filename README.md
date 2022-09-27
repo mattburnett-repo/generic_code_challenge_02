@@ -59,4 +59,34 @@ yarn start
 ```
 
 ## Frontend
+If you haven't already cloned the repo
 
+Clone the repo
+```sh
+git clone https://github.com/baobab-insurance/coding-challenge-mattburnett-repo.git
+```
+
+After cloning the repo, you can install the frontend and start it.
+
+If you're not in the `coding-challenge-mattburnett-repo`, change directories to the `coding-challenge-mattburnett-repo` directory
+```sh
+cd coding-challenge-mattburnett-repo 
+```
+
+Install the frontend modules:
+```sh
+cd yarn
+yarn
+```
+
+Copy the .sample.env file
+```sh
+cp .sample.env .env
+```
+
+Start the frontend
+```sh
+yarn start
+```
+
+You should find the app in your browser at `http://localhost:3000`
