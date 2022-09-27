@@ -25,16 +25,16 @@ Install the backend modules:
 cd backend
 yarn
 ```
-Copy the .sample.env file
+Copy the .env.example file
 ```sh
-cp .sample-env .env
+cp .env.example .env
 ```
 
 The backend uses a 3rd party API to retrieve DNS information for a given domain. 
 
 This API requires a key, which for security reasons is not included in this repo. The key for this API is provided separately.
 
-Copy the api key into the `.env` file as the `dns_api_key` value.
+Copy the api key into the `.env` file as the `DNS_API_KEY` value.
 
 You will need to run the Typescript compiler to create the JavaScript files for the backend.
 

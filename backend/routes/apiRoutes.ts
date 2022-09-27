@@ -56,7 +56,7 @@ type RiskAssessment = {
   hasDKIM: boolean
 }
 
-// const mockResponse: ApiResponse = require('../../mockData/baobab_mock.json')
+const mockResponse: ApiResponse = require('../../mockData/baobab_mock.json')
 
 module.exports = (app: any) => {
   app.use('/', router);
@@ -171,6 +171,7 @@ module.exports = (app: any) => {
     })
 
     //  NOTE: expects Body / x-www-form-urlencoded from UI / client
+
     var config = {
       method: "post",
       url: process.env.DNS_API_URL,
@@ -182,12 +183,22 @@ module.exports = (app: any) => {
     };
 
     try {
-      const result = await axios(config)
-      let assessedRisk: RiskAssessment = calculateRisk(result.data)
+      console.log('before axios')
+      const result = await axios(config) // sending back an html doc???
+      console.log('after axios')
+      // console.log('axios result: ', result.data)
+      // console.log('asdf DNS_API_URL: ', process.env.DNS_API_URL)
+      // console.log('asdf DNS_API_KEY: ', process.env.DNS_API_KEY)
+      // res.status(200).json(('end of fetch / try'))
+      console.log('before calculateRisk')
+      let assessedRisk: RiskAssessment = await calculateRisk(mockResponse)
+      // let assessedRisk: RiskAssessment = calculateRisk(result.data)
+      console.log('after calculateRisk')
 
       res.status(200).json(assessedRisk)
     } catch (err: any) {
-      res.status(err.response.data.apiCode).json({ "message": err.response.data })
+      // res.status(err.response.data.apiCode).json({ "message": err.response.data })
+      res.status(err.response)
     }
   })
 }
