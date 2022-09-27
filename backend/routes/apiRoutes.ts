@@ -56,13 +56,15 @@ type RiskAssessment = {
   hasDKIM: boolean
 }
 
-const mockResponse: ApiResponse = require('../../mockData/baobab_mock.json')
+// const mockResponse: ApiResponse = require('../../mockData/baobab_mock.json')
 
 module.exports = (app: any) => {
   app.use('/', router);
 
   // calculateRisk() is really long and should be in a separate file
   const calculateRisk = (apiRecord: ApiResponse): RiskAssessment => {
+    // console.log('apiRecord: ', apiRecord)
+
     let tempRiskLevel: number = 3
     let tempHasEmail: boolean = false
     let tempHasSPF: boolean = false
@@ -183,22 +185,12 @@ module.exports = (app: any) => {
     };
 
     try {
-      console.log('before axios')
       const result = await axios(config) // sending back an html doc???
-      console.log('after axios')
-      // console.log('axios result: ', result.data)
-      // console.log('asdf DNS_API_URL: ', process.env.DNS_API_URL)
-      // console.log('asdf DNS_API_KEY: ', process.env.DNS_API_KEY)
-      // res.status(200).json(('end of fetch / try'))
-      console.log('before calculateRisk')
-      let assessedRisk: RiskAssessment = await calculateRisk(mockResponse)
-      // let assessedRisk: RiskAssessment = calculateRisk(result.data)
-      console.log('after calculateRisk')
+      let assessedRisk: RiskAssessment = calculateRisk(result.data)
 
       res.status(200).json(assessedRisk)
     } catch (err: any) {
-      // res.status(err.response.data.apiCode).json({ "message": err.response.data })
-      res.status(err.response)
+      res.status(err.response.data.apiCode).json(err)
     }
   })
 }

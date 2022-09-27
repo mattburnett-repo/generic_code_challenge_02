@@ -13,6 +13,11 @@ The required modules for both the frontend and backend must first be installed.
 ## Installation / Getting Started
 
 ### Backend
+Clone the repo
+```sh
+git clone https://github.com/baobab-insurance/coding-challenge-mattburnett-repo.git
+```
+
 After cloning the repo, you can install the backend, compile it to TypeScript, and start the backend.
 
 First, change to the `coding-challenge-mattburnett-repo` directory
@@ -25,16 +30,14 @@ Install the backend modules:
 cd backend
 yarn
 ```
-Copy the .env.example file
+Copy the .sample.env file
 ```sh
-cp .env.example .env
+cp .sample.env .env
 ```
 
-The backend uses a 3rd party API to retrieve DNS information for a given domain. 
-
-This API requires a key, which for security reasons is not included in this repo. The key for this API is provided separately.
-
-Copy the api key into the `.env` file as the `DNS_API_KEY` value.
+* The backend uses a 3rd party API to retrieve DNS information for a given domain. 
+* This API requires a key, which for security reasons is not included in this repo. The key for this API is provided separately.
+* Copy the api key into the `.env` file as the `DNS_API_KEY` value.
 
 You will need to run the Typescript compiler to create the JavaScript files for the backend.
 
@@ -42,8 +45,8 @@ When you are in the `backend` directory, type
 ```sh
 yarn tsc
 ```
-This should run the TypeScript complier, which emits files to the `dist` folder.\ 
-The backend runs from code in the `dist` folder
+* This should run the TypeScript complier, which emits files to the `dist` folder.
+* The backend runs from code in the `dist` folder
 
 If you want to start the backend in development mode (using nodemon)
 ```sh
