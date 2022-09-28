@@ -34,9 +34,6 @@ module.exports = (app: any) => {
 
       // let assessedRisk: RiskAssessment = calculateRisk(mockResponse)
 
-      console.log("assessedRisk", assessedRisk)
-
-
       res.status(200).json(assessedRisk)
     } catch (err: any) {
       let theError: ApiError = {

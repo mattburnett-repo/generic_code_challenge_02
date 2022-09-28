@@ -62,13 +62,11 @@ yarn start
 You should find the backend app at `http://localhost:4000`
 
 ## Frontend
-After cloning the repo, you can install the frontend and start it.
-
-You are probably already in the `coding-challenge-mattburnett-repo/backend` directory. 
+Open a separate terminal window and cd to the `coding-challenge-mattburnett-repo` directory.
 
 Change to the frontend directory and install the frontend modules:
 ```sh
-cd ../frontend
+cd frontend
 yarn
 ```
 
