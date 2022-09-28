@@ -15,11 +15,11 @@ This project uses Typescript / React / Node as the main elements of its stack.
 It calls a 3rd party API [Geekflare.com](https://geekflare.com/api/docs#dns-records) as a data source. The data for a requested domain name is retrieved, and a simple risk calculation is made from that data.
 
 ## Installation / Getting Started
-First, clone the repo
+First, clone the repo:
 ```sh
 git clone https://github.com/baobab-insurance/coding-challenge-mattburnett-repo.git
 ```
-Then, change to the `coding-challenge-mattburnett-repo` directory
+Then, change to the `coding-challenge-mattburnett-repo` directory:
 ```sh
 cd coding-challenge-mattburnett-repo 
 ```
@@ -31,7 +31,7 @@ Install the backend modules:
 cd backend
 yarn
 ```
-Copy the .sample.env file
+Copy the .sample.env file:
 ```sh
 cp .sample.env .env
 ```
@@ -47,14 +47,14 @@ When you are in the `backend` directory, type
 yarn tsc
 ```
 * This should run the TypeScript complier, which emits JavaScript files to the `dist` folder.
-* The backend runs from code in the `dist` folder
+* The backend runs from code in the `dist` folder.
 
-If you want to start the backend in development mode (using nodemon)
+To start the backend in development mode (using nodemon):
 ```sh
 yarn start:dev
 ```
 
-To start the backend without nodemon
+To start the backend without nodemon:
 ```sh
 yarn start
 ```
@@ -66,13 +66,13 @@ After cloning the repo, you can install the frontend and start it.
 
 You are probably already in the `coding-challenge-mattburnett-repo/backend` directory. 
 
-Change to the frontend directory and install the frontend modules.
+Change to the frontend directory and install the frontend modules:
 ```sh
 cd ../frontend
 yarn
 ```
 
-Start the frontend
+Start the frontend:
 ```sh
 yarn start
 ```
@@ -81,3 +81,8 @@ You should find the frontend app in your browser at `http://localhost:3000`
 
 ## To Do
 * Everything can always be better.
+* Docker container.
+* CSS for the text in ResponseDisplay.tsx (font weight and color). 
+* Replace data fetch in frontend/AppContainer.tsx with useQuery().
+* Clean up the minor TODO's in the files.
+* Incorporate more API's and combine them using graphQL.
