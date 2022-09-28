@@ -686,8 +686,8 @@ video {
 }
 
 .app-container {
-  margin-top: 6rem;
-  margin-bottom: 6rem;
+  margin-top: 2rem;
+  /* margin-bottom: 1rem; */
   margin-left: auto;
   margin-right: auto;
   width: 25%;
@@ -723,7 +723,7 @@ video {
 }
 
 .btn-app {
-  width: 9rem;
+  width: 18rem;
   border-radius: 0.25rem;
   border-width: 2px;
   --tw-border-opacity: 1;

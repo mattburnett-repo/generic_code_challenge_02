@@ -10,20 +10,21 @@ It consists of one repo, which contains code for both the [backend](./backend) a
 
 The required modules for both the frontend and backend must first be installed.
 
-## Installation / Getting Started
+This project uses Typescript / React / Node as the main elements of its stack.
 
-### Backend
-Clone the repo
+It calls a 3rd party API [Geekflare.com](https://geekflare.com/api/docs#dns-records) as a data source. The data for a requested domain name is retrieved, and a simple risk calculation is made from that data.
+
+## Installation / Getting Started
+First, clone the repo
 ```sh
 git clone https://github.com/baobab-insurance/coding-challenge-mattburnett-repo.git
 ```
-
-After cloning the repo, you can install the backend, compile it to TypeScript, and start the backend.
-
-First, change to the `coding-challenge-mattburnett-repo` directory
+Then, change to the `coding-challenge-mattburnett-repo` directory
 ```sh
 cd coding-challenge-mattburnett-repo 
 ```
+### Backend
+After cloning the repo and changing to its root directory, you can install the backend, compile it to TypeScript, and start the backend.
 
 Install the backend modules:
 ```sh
@@ -45,7 +46,7 @@ When you are in the `backend` directory, type
 ```sh
 yarn tsc
 ```
-* This should run the TypeScript complier, which emits files to the `dist` folder.
+* This should run the TypeScript complier, which emits JavaScript files to the `dist` folder.
 * The backend runs from code in the `dist` folder
 
 If you want to start the backend in development mode (using nodemon)
@@ -58,30 +59,17 @@ To start the backend without nodemon
 yarn start
 ```
 
+You should find the backend app at `http://localhost:4000`
+
 ## Frontend
-If you haven't already cloned the repo
-
-Clone the repo
-```sh
-git clone https://github.com/baobab-insurance/coding-challenge-mattburnett-repo.git
-```
-
 After cloning the repo, you can install the frontend and start it.
 
-If you're not in the `coding-challenge-mattburnett-repo`, change directories to the `coding-challenge-mattburnett-repo` directory
-```sh
-cd coding-challenge-mattburnett-repo 
-```
+You are probably already in the `coding-challenge-mattburnett-repo/backend` directory. 
 
-Install the frontend modules:
+Change to the frontend directory and install the frontend modules.
 ```sh
-cd yarn
+cd ../frontend
 yarn
-```
-
-Copy the .sample.env file
-```sh
-cp .sample.env .env
 ```
 
 Start the frontend
@@ -89,4 +77,7 @@ Start the frontend
 yarn start
 ```
 
-You should find the app in your browser at `http://localhost:3000`
+You should find the frontend app in your browser at `http://localhost:3000`
+
+## To Do
+* Everything can always be better.
