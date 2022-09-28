@@ -22,7 +22,7 @@
     "headers": {
       "Accept": "application/json, text/plain, */*",
       "Content-Type": "application/json",
-      "x-api-key": "ce9c4692-9881-4ec9-82c3-f4ac3740ebe1",
+      "x-api-key": "",
       "User-Agent": "axios/0.27.2",
       "Content-Length": 65
     },
