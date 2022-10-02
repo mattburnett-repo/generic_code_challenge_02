@@ -1,10 +1,8 @@
-# Baobab Insurance - Coding Challenge
+# Generic Coding Challenge 02
 
 
 ## Assignment
-This is the repo for the Baobab Insurance coding challenge.
-
-It follows the instructions provided [here](./instructions.md).
+This is the repo for generic code challenge #2.
 
 It consists of one repo, which contains code for both the [backend](./backend) and the [frontend](./frontend).
 
@@ -12,26 +10,26 @@ The required modules for both the frontend and backend must first be installed.
 
 This project uses Typescript / React / Node as the main elements of its stack.
 
-It calls a 3rd party API [Geekflare.com](https://geekflare.com/api/docs#dns-records) as a data source. The data for a requested domain name is retrieved, and a simple risk calculation is made from that data.
+It calls a 3rd party API as a data source. The data for a requested domain name is retrieved, and a simple risk calculation is made from that data.
 
 ## Installation / Getting Started
 First, clone the repo:
 ```sh
-git clone https://github.com/baobab-insurance/coding-challenge-mattburnett-repo.git
+git clone https://github.com/mattburnett-repo/generic_code_challenge_02
 ```
-Then, change to the `coding-challenge-mattburnett-repo` directory:
+Then, change to the `generic_code_challenge_02` directory:
 ```sh
-cd coding-challenge-mattburnett-repo 
+cd generic_code_challenge_02
 ```
 ### Backend
 After cloning the repo and changing to its root directory, you can install the backend, compile it to TypeScript, and start the backend.
 
-Install the backend modules:
+* Install the backend modules:
 ```sh
 cd backend
 yarn
 ```
-Copy the .sample.env file:
+* Copy the .sample.env file:
 ```sh
 cp .sample.env .env
 ```
@@ -42,7 +40,7 @@ cp .sample.env .env
 
 You will need to run the Typescript compiler to create the JavaScript files for the backend.
 
-When you are in the `backend` directory, type
+* When you are in the `backend` directory, type
 ```sh
 yarn tsc
 ```
