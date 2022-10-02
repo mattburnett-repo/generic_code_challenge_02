@@ -33,7 +33,7 @@ yarn
 cp .sample.env .env
 ```
 
-* The backend uses a 3rd party API to retrieve DNS information for a given domain. 
+* The backend uses a 3rd party API to retrieve data for a given search term. 
 * This API requires a key, which for security reasons is not included in this repo. The key for this API is provided separately.
 * Copy the api key into the `.env` file as the `DNS_API_KEY` value.
 
