@@ -1,6 +1,5 @@
 # Generic Coding Challenge 02
 
-
 ## Assignment
 This is the repo for generic code challenge #2.
 
@@ -10,7 +9,7 @@ The required modules for both the frontend and backend must first be installed.
 
 This project uses Typescript / React / Node as the main elements of its stack.
 
-It calls a 3rd party API as a data source. The data for a requested domain name is retrieved, and a simple risk calculation is made from that data.
+It calls a 3rd party API as a data source. The requested data is retrieved, and a simple assessment is made from that data.
 
 ## Installation / Getting Started
 First, clone the repo:
@@ -60,7 +59,7 @@ yarn start
 You should find the backend app at `http://localhost:4000`
 
 ## Frontend
-Open a separate terminal window and cd to the `coding-challenge-mattburnett-repo` directory.
+Open a separate terminal window and cd to the `generic_code_challenge_02` directory.
 
 Change to the frontend directory and install the frontend modules:
 ```sh
@@ -77,6 +76,7 @@ You should find the frontend app in your browser at `http://localhost:3000`
 
 ## To Do
 * Everything can always be better.
+* Find a good, generic, useful 3rd party API.
 * Docker container.
 * CSS for the text in ResponseDisplay.tsx (font weight and color). 
 * Replace data fetch in frontend/AppContainer.tsx with useQuery().
