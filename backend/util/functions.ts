@@ -1,102 +1,54 @@
 
-import { ApiResponse, RiskAssessment } from '../../types/'
+import { ApiResponse, ApiRecord, ApiResult, Estimate, EstimateRecord } from '../../types/'
 
-// this could be refactored / generalised / etc. for each 'type' (MX / TXT types)
-export const calculateRisk = (apiRecord: ApiResponse): RiskAssessment => {
-  let tempRiskLevel: number = 3
-  let tempHasEmail: boolean = false
-  let tempHasSPF: boolean = false
-  let tempHasDKIM: boolean = false
-  let tempHasDMARC: boolean = false
-  let tempRiskLevelDesc: string = ''
+export const transformRecord = (apiRecord: ApiResponse): Estimate => {
+  let theRecord: ApiResult = apiRecord.result
 
-  if (apiRecord.data.MX.length > 0) {
-    try {
-      apiRecord.data.MX.forEach(elem => {
-        let theStr: string = elem.exchange
-        //  TODO: this could be done more cleanly
-        if (theStr.includes('google.com') || theStr.includes('protonmail') || theStr.includes('Outlook')) {
-          tempHasEmail = true
-          tempRiskLevel -= 1
+  let result: Estimate = {
+    watts: parseRecord(theRecord.watts),
+    watt_hours: parseRecord(theRecord.watt_hours),
+    watt_hours_period: parseRecord(theRecord.watt_hours_period),
+    watt_hours_day: parseRecord(theRecord.watt_hours_day),
+    message: apiRecord.message
+  }
 
-          throw new Error("End MX loop")
+  return result
+}
+
+const parseRecord = (record: ApiRecord): Array<EstimateRecord> => {
+  let date: string
+  let time: string
+  let watts: string | number  // it's really a number, but this makes typescript happy.
+  let result: Array<EstimateRecord> = []
+  let estimateDate: string = ''
+  let estimate: EstimateRecord = {}
+
+  const recordLength: number = Object.entries(record).length
+
+  // FIXME: this has a O() of n-squared (or something similar)?
+  //    tried a for ... in loop, because grinding through the recordset only once could
+  //      reduce O() to n. While trying to get it to work, I debugged by
+  //      writing out the steps involved, using nested for loops. Then all of a sudden
+  //      it worked, so I'm sticking with this version for now.
+  for (let i = 0; i < recordLength; i++) {
+    date = Object.keys(record)[i].split(' ')[0]
+
+    if (date != estimateDate) {
+      estimateDate = date
+      estimate[estimateDate] = []
+
+      for (let j = 0; j < recordLength; j++) {
+        if (Object.keys(record)[j].split(' ')[0] == estimateDate) {
+          time = Object.keys(record)[j].split(' ')[1]
+          watts = Object.values(record)[j]
+          estimate[estimateDate].push({ time, watts })
         }
-      })
-    } catch (e) {
-      // catch error to break out of forEach()
-      // console.log(e.message)
+      }
+
+      // we're done with the current estimate. push it to the result array and make room for a new one.
+      result.push(estimate)
+      estimate = {}
     }
-  }
-
-  // check for SPF
-  if (apiRecord.data.TXT.length > 0) {
-    try {
-      apiRecord.data.TXT.forEach(elem => {
-        if (elem[0].includes('v=spf')) {
-          tempHasSPF = true
-          tempRiskLevel -= 1
-
-          throw new Error("End SPF check")
-        }
-      })
-    } catch (e) {
-      // catch error to break out of forEach()
-      // console.log(e)
-    }
-  }
-  // check for DKIM
-  //  TODO: combine with SPF test, since we're just looping though TXT records
-  if (apiRecord.data.TXT.length > 0) {
-    try {
-      apiRecord.data.TXT.forEach(elem => {
-        if (elem[0].includes('v=DKIM')) {
-          tempHasDKIM = true
-          // tempRiskLevel -= 1
-
-          throw new Error("End DKIM check")
-        }
-      })
-    } catch (e) {
-      // catch error to break out of forEach()
-      //  console.log(e.message)
-    }
-
-  }
-  // can't find an API that returns DMARC with all other DNS info
-  //    since DMARC can't exist without SPR and DKIM, let's assume
-  //      that a DNS record with SPF and DKIM also has DMARC
-  // TODO: find API that returns SPF and DMARC info in one record
-  if (tempHasSPF && tempHasDKIM) {
-    tempHasDMARC = true
-    tempRiskLevel -= 1
-  }
-
-  //  this could be typed better, maybe an enum
-  switch (tempRiskLevel) {
-    case (3):
-      tempRiskLevelDesc = 'Risk level is high.'
-      break
-    case (2):
-      tempRiskLevelDesc = 'Risk level is moderately high.'
-      break
-    case (1):
-      tempRiskLevelDesc = 'Risk level is moderately low.'
-      break
-    case (0):
-      tempRiskLevelDesc = 'Risk level is low.'
-      break
-    default:
-      tempRiskLevelDesc = 'Cannot determine risk level with given information.'
-  }
-
-  let result: RiskAssessment = {
-    domain: apiRecord.meta.url,
-    riskLevel: tempRiskLevel,
-    riskLevelDesc: tempRiskLevelDesc,
-    hasMatureEmail: tempHasEmail,
-    hasDMARC: tempHasDMARC,
-    hasSPF: tempHasSPF,
-    hasDKIM: tempHasDKIM
   }
 
   return result

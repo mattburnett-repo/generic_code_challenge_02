@@ -4,46 +4,45 @@ var router = express.Router();
 
 var axios = require('axios');
 
-import { ApiError, RiskAssessment, ApiResponse } from '../../types/'
-import { calculateRisk } from '../util/functions'
+import { ApiError, Estimate } from '../../types/'
+import { transformRecord } from '../util/functions'
+
+// jump up three directories because we are actually running the compiled TS code in the 'dist' folder. 
+const mockData = require('../../../mock_data/estimate.js')
 
 module.exports = (app: any) => {
   app.use('/', router);
 
+  // GET seems more intuitive / appropriate, but we should use POST.
   router.post('/', async (req: any, res: any) => {
-    let data: string = JSON.stringify({
-      url: req.body.domainName,
-      types: ["A", "MX", "NS", "SOA", "TXT"],
-    })
-
-    //  NOTE: this route expects Body = x-www-form-urlencoded from UI / client
-    //    it sends application/json to the 3rd party API
     var config = {
       method: "post",
       url: process.env.DNS_API_URL,
       headers: {
-        "x-api-key": process.env.DNS_API_KEY,
         "Content-Type": "application/json",
-      },
-      data: data,
+      }
     };
 
     try {
-      const result = await axios(config)
-      let assessedRisk: RiskAssessment = calculateRisk(result.data)
+      //  FIXME: don't forget to switch from mock data to API call.
+      // const fetchResult = await axios(config)
+      const fetchResult = mockData
 
-      // let assessedRisk: RiskAssessment = calculateRisk(mockResponse)
+      const result: Estimate = transformRecord(fetchResult)
 
-      res.status(200).json(assessedRisk)
+      res.status(200).json(result)
+
     } catch (err: any) {
+      //  FIXME: figure out the shape / type for errors
       let theError: ApiError = {
         message: err.message,
         name: err.name,
         code: err.code,
-        status: err.response.status
+        // status: err.response.status
       }
 
-      res.status(theError.status).json(theError)
+      // res.status(theError.status).json(theError)
+      res.status(400).json(theError)
     }
   })
 }

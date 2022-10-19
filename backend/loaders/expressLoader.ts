@@ -1,4 +1,6 @@
 
+//  a minimal Express server configuration
+
 var express = require('express');
 var path = require('path');
 
@@ -8,15 +10,13 @@ var bodyParser = require('body-parser');
 
 module.exports = (app: any) => {
   let corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: process.env.CLIENT_URL
   }
   app.use(cors(corsOptions))
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
-
-  app.use(express.static(path.join(__dirname, '../public')));
 
   return app;
 }

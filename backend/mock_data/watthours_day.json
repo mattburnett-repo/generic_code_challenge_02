@@ -1,0 +1,18 @@
+{
+  "result": { "2022-10-15": 13439, "2022-10-16": 14066 },
+  "message": {
+    "code": 0,
+    "type": "success",
+    "text": "",
+    "info": {
+      "latitude": 52,
+      "longitude": 12,
+      "distance": 0,
+      "place": "L 51, Schora, Moritz, Zerbst/Anhalt, Anhalt-Bitterfeld, Sachsen-Anhalt, 39264, Deutschland",
+      "timezone": "Europe/Berlin",
+      "time": "2022-10-15T21:02:18+02:00",
+      "time_utc": "2022-10-15T19:02:18+00:00"
+    },
+    "ratelimit": { "period": 3600, "limit": 12, "remaining": 9 }
+  }
+}

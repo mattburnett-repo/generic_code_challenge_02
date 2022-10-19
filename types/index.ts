@@ -1,60 +1,82 @@
 
 // types for the entire code challenge project (frontend and backend)
 
-// interface, because maybe it needs to be composed later into something bigger
+// what we expect from the API
+//    interface, because maybe someday it needs to be composed later into something bigger
 export interface ApiResponse {
-  timestamp: number,
-  apiStatus: string,
-  apiCode: number,
-  meta: MetaData,
-  data: ResponseData,
+  result: ApiResult,
+  message: ApiMessage
 }
 
-type MetaData = {
-  url: string
+export type ApiResult = {
+  watts: ApiRecord,
+  watt_hours: ApiRecord,
+  watt_hours_period: ApiRecord,
+  watt_hours_day: ApiRecord
 }
 
-type ResponseData = {
-  A: Array<A_record>,
-  MX: Array<MX_record>,
-  NS: Array<String>,
-  SOA: Array<SOA_record>,
-  TXT: Array<String>
+export type ApiRecord = {
+  date_time: string,
+  watt_amount: number
 }
 
-type A_record = {
-  address: string,
-  ttl: number
+type ApiMessage = {
+  code: number,
+  type: string,
+  text: string,
+  info: ApiMessageInfo,
+  rateLimit: ApiRateLimit
 }
 
-type MX_record = {
-  exchange: string,
-  priority: number
+type ApiMessageInfo = {
+  latitude: number,
+  longitude: number,
+  distance: number,
+  place: string,
+  timezone: string,
+  time: string,
+  time_utc: string
 }
 
-type SOA_record = {
-  nsname: string,
-  hostmaster: string,
-  serial: number,
-  refresh: number,
-  retry: number,
-  expire: number,
-  minttl: number
+type ApiRateLimit = {
+  period: number,
+  limit: number,
+  remaining: number
 }
 
+//  What we send back
+export type Estimate = {
+  watts: Array<EstimateRecord>,
+  watt_hours: Array<EstimateRecord>,
+  watt_hours_period: Array<EstimateRecord>,
+  watt_hours_day: Array<EstimateRecord>,
+  message: EstimateMessage
+}
+
+// https://www.w3schools.com/typescript/typescript_object_types.php
+//    index signatures
+export type EstimateRecord = {
+  [index: string]: Array<EstimateData>
+}
+
+type EstimateData = {
+  time: string,
+  watts: string | number
+}
+
+type EstimateMessage = {
+  code: number,
+  type: string,
+  text: string,
+  info: ApiMessageInfo,
+  rateLimit: ApiRateLimit
+}
+
+// Error from api when fetching data
+//  FIXME: figure out shape of error message and clean this up. Also in apiRoutes.js
 export type ApiError = {
   message: string,
   name: string,
   code: string,
-  status: number
-}
-
-export type RiskAssessment = {
-  domain: string,
-  riskLevel: number,
-  riskLevelDesc: string,
-  hasMatureEmail: boolean,
-  hasDMARC: boolean,
-  hasSPF: boolean,
-  hasDKIM: boolean
+  // status: number
 }
