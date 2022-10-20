@@ -42,7 +42,7 @@ From here you can avoid the installation steps by [starting the Docker container
 
 That being said, here is how to install and start the pieces of this project:
 
-### Backend
+## Backend
 
 After cloning the repo and changing to its root directory, you can install the backend, compile it to TypeScript, and start it.
 
