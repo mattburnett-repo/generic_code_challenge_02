@@ -449,7 +449,7 @@ video {
   /* margin-bottom: 1rem; */
   margin-left: auto;
   margin-right: auto;
-  width: 25%;
+  width: 45%;
   border-width: 2px;
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
@@ -465,7 +465,12 @@ video {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
-
+.app-info {
+  margin: 1rem;
+  text-align: center;
+  font-size: 1.15rem;
+  line-height: 0.75rem;
+}
 .app-input {
   padding: 0.5rem;
   text-align: center;
@@ -479,6 +484,28 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   padding: 0.5rem;
+}
+.font-weight-900 {
+  font-weight: 900;
+}
+.font-weight-700 {
+  font-weight: 700;
+}
+.font-weight-600 {
+  font-weight: 600;
+}
+.font-weight-500 {
+  font-weight: 500;
+}
+.font-weight-400 {
+  font-weight: 400;
+}
+
+.indent-20-px {
+  text-indent: 20px;
+}
+.indent-40-px {
+  text-indent: 40px;
 }
 
 .btn-app {

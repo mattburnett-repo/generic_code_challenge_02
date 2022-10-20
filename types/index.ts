@@ -59,7 +59,7 @@ export type EstimateRecord = {
   [index: string]: Array<EstimateData>
 }
 
-type EstimateData = {
+export type EstimateData = {
   time: string,
   watts: string | number
 }
