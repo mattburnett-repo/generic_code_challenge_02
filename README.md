@@ -89,6 +89,12 @@ cd frontend
 yarn
 ```
 
+Copy the `.sample.env` to the `.env` file:
+
+```sh
+cp .sample.env .env
+```
+
 Start the frontend:
 
 ```sh
@@ -101,9 +107,11 @@ You should find the frontend app in your browser at `http://localhost:3000`
 
 - Everything can always be better.
 - Use TypeScript `<Record>` type.
+- More / better typing in frontend components (refer to TODO's in files).
 - Add UI functionality to allow end user to specify lat / long values and other possible variables.
 - Docker container.
-- CSS for the text in ResponseDisplay.tsx (font weight and color).
 - Replace data fetch in frontend/AppContainer.tsx with useQuery().
 - Clean up the minor TODO's in the files.
 - Incorporate more API's and combine them using graphQL.
+- Tests?
+  - For a project this small, tests are a bit of overkill.

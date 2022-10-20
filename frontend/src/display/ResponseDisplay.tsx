@@ -1,23 +1,22 @@
-import "../index.css";
+import "../index.css"
 
-const ResponseDisplay = ({ theData }: any) => {
+import ResponsePanelDisplay from "./ResponsePanelDisplay"
+
+// FIXME: Correctly type { theData } prop as 'Estimate' and not 'any'
+const ResponseDisplay = ({ theData }: { theData: any }) => {
   return (
     <div className="app-container">
-      <div className="app-title">Assessment</div>
-      <div className="app-panel">
-        <h3>The term you searched for: {theData.domain}</h3>
-        <h3>
-          The assessment for {theData.domain}: {theData.riskLevel}
-        </h3>
-        <h3>Assessment level description: {theData.riskLevelDesc}</h3>
-        <h3>Assessment evaluation criteria:</h3>
-        <h3>- Has mature email: {"" + theData.hasMatureEmail}</h3>
-        <h3>- Has SPF: {"" + theData.hasSPF}</h3>
-        <h3>- Has DKIM: {"" + theData.hasDKIM}</h3>
-        <h3>- Has DMARC (assumed): {"" + theData.hasDMARC}</h3>
+      <div className="app-title">Photovoltaic Production Estimate</div>
+      <div className="app-info">
+        {theData.message.ratelimit.limit} API calls per hour are allowed.
       </div>
+      <div className="app-info">
+        There are {theData.message.ratelimit.remaining} remaining.
+      </div>
+      {/* FIXME: This is props drilling and should be avoided. */}
+      <ResponsePanelDisplay theData={theData} />
     </div>
-  );
-};
+  )
+}
 
-export default ResponseDisplay;
+export default ResponseDisplay

@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState } from "react"
 
-import "../index.css";
+import "../index.css"
 
 const FormDisplay = ({ submitHandler }: any) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("")
 
-  const handleChange = (e: any) => {
-    e.preventDefault();
-    setSearchTerm(e.target.value);
-  };
+  // const handleChange = (e: any) => {
+  //   e.preventDefault()
+  //   setSearchTerm(e.target.value)
+  // }
 
   return (
     <div className="app-container">
@@ -21,23 +21,20 @@ const FormDisplay = ({ submitHandler }: any) => {
             role="presentation"
             aria-label="searchTerm"
           >
-            <input
-              type="text"
-              name="domainName"
-              placeholder="enter searchTerm here"
-              onChange={handleChange}
-              required
-            />
+            This app receives a solar production estimate for 52° north, 12°
+            east, <br />
+            for an installation with a declination of 37° looking south (0°)
+            with 5.67 kWp.
           </div>
           <div className="app-input">
             <button type="submit" name="search-button" className="btn-app">
-              Get Result
+              Get Estimate
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FormDisplay;
+export default FormDisplay
