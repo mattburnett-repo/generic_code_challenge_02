@@ -9,30 +9,36 @@ The requested data is retrieved, a simple transformation is made to that data, a
 
 It consists of one repo, which contains code for both the [backend](./backend) and the [frontend](./frontend).
 
-The required modules for both the frontend and backend must first be installed.
-
 This project uses Typescript / React / Node as the main elements of its stack.
+
+You can [start the Docker container](#docker) for a simple start-up of the project. If you don't want to do this, the required modules for both the frontend and backend [must first be installed](#installation).
 
 ## Dev Notes
 
 - The 3rd party API is described at this url: [https://doc.forecast.solar/doku.php?id=api:estimate](https://doc.forecast.solar/doku.php?id=api:estimate).
   - This API provides a solar production estimate for specific location (defined by latitude and longitude) and a specific plane orientation (defined by declination and azimuth) for an installed module power. Basically 'where the solar panel is' and 'in which direction the solar panel is pointing'.
   - To keep things simple, calls to this API receive a solar production estimate as JSON for 52° north, 12° east, for a installation with a declination of 37° looking south (0°) with 5.67 kWp.
-    - Further refinement of this application should allow an end user to specify lat / log values, as well as declination / other variables.
+    - Further refinement of this application should allow an end user to specify lat / long values, as well as declination / other variables.
 
-## Installation / Getting Started
+## Installation
 
-First, clone the repo:
+First, you need to clone the repo and move to the root directory:
+
+- Clone the repo:
 
 ```sh
 git clone https://github.com/mattburnett-repo/generic_code_challenge_02
 ```
 
-Then, change to the `generic_code_challenge_02` directory:
+- Change to the `generic_code_challenge_02` directory:
 
 ```sh
 cd generic_code_challenge_02
 ```
+
+From here you can avoid the installation steps by [starting the Docker container](#docker) for this project.
+
+That being said, here is how to install and start the pieces of this project:
 
 ### Backend
 
@@ -103,15 +109,54 @@ yarn start
 
 You should find the frontend app in your browser at `http://localhost:3000`
 
+## Docker
+
+You can start the entire project by using Docker. That way you don't have to go through all of the install steps listed above.
+
+The following steps assume that you have already cloned the repo and are in the `generic_code_challenge_02` directory.
+
+First, create the `.env` files
+
+```sh
+cd backend
+copy .sample.env .env
+```
+
+```sh
+cd frontend
+copy .sample.env .env
+```
+
+In the `generic_code_challenge_02` directory
+
+```sh
+docker compose up
+```
+
+- You should find the app in your browser at `http://localhost:3000`
+
+To stop the Docker container, you can either
+
+```sh
+docker compose down
+```
+
+in another terminal, or just Ctrl+C in the terminal that is running the container.
+
 ## To Do
 
 - Everything can always be better.
+- More / better linting.
+  - TS, mostly.
+- Figure out how to intercept errors sent from the server to Axios, rather than showing the user a generic Axios error.
+- Change estimate display layout to grid format, instead of stacking each estimate on top of each other.
 - Use TypeScript `<Record>` type.
 - More / better typing in frontend components (refer to TODO's in files).
 - Add UI functionality to allow end user to specify lat / long values and other possible variables.
-- Docker container.
+- Upload Docker container to Dockerhub.
 - Replace data fetch in frontend/AppContainer.tsx with useQuery().
 - Clean up the minor TODO's in the files.
 - Incorporate more API's and combine them using graphQL.
-- Tests?
-  - For a project this small, tests are a bit of overkill.
+- Logging.
+- Tests
+  - For a project this small, tests are overkill. But it could be a good excercise to build out tests.

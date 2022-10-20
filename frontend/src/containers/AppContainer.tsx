@@ -20,13 +20,15 @@ const AppContainer = () => {
 
       setTheData(result.data)
     } catch (err: any) {
+      // Catch clause variable type annotation must be 'any' or 'unknown' if specified.
+
+      // TODO: figure out how to intercept error messages sent to Axios,
+      //    instead of handling a generic Axios error message.
       setTheData(null)
       alert(
-        "There was an error: " +
-          err.message +
-          ".\nMaybe the backend isn't running."
+        "There was an error.\n\nUsually this means that the server is down, or there are too mamy requests within one hour."
       )
-      console.log(err)
+      // console.log(err)
     }
   }
 

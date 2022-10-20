@@ -17,7 +17,8 @@
   },
   "scripts": {
     "start": "node ./dist/backend/index.js",
-    "start:dev": "clear && nodemon ./dist/backend/index.js"
+    "start:dev": "clear && nodemon ./dist/backend/index.js",
+    "start:deploy": "node /dist/backend/index.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",

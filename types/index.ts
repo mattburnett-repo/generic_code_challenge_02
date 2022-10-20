@@ -44,6 +44,16 @@ type ApiRateLimit = {
   remaining: number
 }
 
+// Error from api when fetching data
+//  FIXME: figure out shape of error message and clean this up. Also in apiRoutes.js
+export type ApiError = {
+  code: string,
+  text: string,
+  name?: string,
+  status?: number,
+  statusText?: string
+}
+
 //  What we send back
 export type Estimate = {
   watts: Array<EstimateRecord>,
@@ -70,13 +80,4 @@ type EstimateMessage = {
   text: string,
   info: ApiMessageInfo,
   rateLimit: ApiRateLimit
-}
-
-// Error from api when fetching data
-//  FIXME: figure out shape of error message and clean this up. Also in apiRoutes.js
-export type ApiError = {
-  message: string,
-  name: string,
-  code: string,
-  // status: number
 }
