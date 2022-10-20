@@ -1,15 +1,7 @@
-import { useState } from "react"
-
 import "../index.css"
 
 const FormDisplay = ({ submitHandler }: any) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchTerm, setSearchTerm] = useState("")
-
-  // const handleChange = (e: any) => {
-  //   e.preventDefault()
-  //   setSearchTerm(e.target.value)
-  // }
 
   return (
     <div className="app-container">
@@ -19,12 +11,13 @@ const FormDisplay = ({ submitHandler }: any) => {
           <div
             className="app-input"
             role="presentation"
-            aria-label="searchTerm"
+            aria-label="description-text"
           >
             This app receives a solar production estimate for 52° north, 12°
             east, <br />
             for an installation with a declination of 37° looking south (0°)
-            with 5.67 kWp.
+            with 5.67 kWp. <br />
+            The estimates are in hourly increments.
           </div>
           <div className="app-input">
             <button type="submit" name="search-button" className="btn-app">

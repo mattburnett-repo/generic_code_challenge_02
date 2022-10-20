@@ -4,7 +4,7 @@ var router = express.Router();
 
 var axios = require('axios');
 
-import { ApiError, Estimate } from '../../types/'
+import { Estimate, ApiError } from '../../types/'
 import { transformRecord } from '../util/functions'
 
 // jump up three directories because we are actually running the compiled TS code in the 'dist' folder. 
@@ -14,9 +14,11 @@ module.exports = (app: any) => {
   app.use('/', router);
 
   // GET seems more intuitive / appropriate, but we should use POST.
+  //    we POST from the UI, but we GET from the API. Maybe we will
+  //      send vars from the UI, in the future.
   router.post('/', async (req: any, res: any) => {
     var config = {
-      method: "post",
+      method: "get",
       url: process.env.DNS_API_URL,
       headers: {
         "Content-Type": "application/json",
@@ -24,25 +26,32 @@ module.exports = (app: any) => {
     };
 
     try {
-      //  FIXME: don't forget to switch from mock data to API call.
-      // const fetchResult = await axios(config)
-      const fetchResult = mockData
-
-      const result: Estimate = transformRecord(fetchResult)
+      const fetchResult = await axios(config)
+      const result: Estimate = transformRecord(fetchResult.data)
 
       res.status(200).json(result)
 
     } catch (err: any) {
-      //  FIXME: figure out the shape / type for errors
-      let theError: ApiError = {
-        message: err.message,
-        name: err.name,
-        code: err.code,
-        // status: err.response.status
+      // Catch clause variable type annotation must be 'any' or 'unknown' if specified.
+
+      let apiError: ApiError
+
+      if (err.response.status == 429) {
+        apiError = {
+          code: err.response.status,
+          text: err.response.statusText
+        }
+      } else {
+        apiError = {
+          code: err.response.status,
+          text: err.response.statusText
+        }
       }
 
-      // res.status(theError.status).json(theError)
-      res.status(400).json(theError)
+      // console.log('err: ', err)
+      // console.log('error code: ', err.response.status)
+      // console.log('apiError: ', apiError)
+      res.status(400).json(apiError)
     }
   })
 }
