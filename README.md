@@ -1,4 +1,4 @@
-![repo header](public/header.png?raw=true "Generic FSE Code Challenge 02")
+![repo header](images/header.png?raw=true "Generic FSE Code Challenge 02")
 
 # Generic Coding Challenge 02
 
