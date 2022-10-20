@@ -8,6 +8,3 @@ dist
 
 yarn.lock
 .env
-
-Dockerfile
-docker-compose.yml
