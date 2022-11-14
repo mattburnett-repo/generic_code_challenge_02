@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   backend:
-    container_name: generic-fse-02-backend
+    container_name: backend
     build:
       context: backend
       dockerfile: Dockerfile
@@ -13,7 +13,7 @@ services:
     volumes:
       - ./types:/types
   frontend:
-    container_name: generic-fse-02-frontend
+    container_name: frontend
     build:
       context: frontend
       dockerfile: Dockerfile

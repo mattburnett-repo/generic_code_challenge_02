@@ -113,25 +113,34 @@ You should find the frontend app in your browser at `http://localhost:3000`
 
 ## Docker
 
-You can start the entire project by using Docker. That way you don't have to go through all of the install steps listed above.
+You can start the entire project by using Docker. There are a few steps to take, before bringing up the Docker project.
 
 The following steps assume that you have already cloned the repo and are in the `generic_code_challenge_02` directory.
 
-First, create the `.env` files
+First, set up the backend:
 
 ```sh
 cd backend
-copy .sample.env .env
+cp .sample.env .env
 ```
 
+Compile the TypeScript for the backend:
+
 ```sh
-cd frontend
-copy .sample.env .env
+yarn tsc
 ```
 
-In the `generic_code_challenge_02` directory
+Next, set up the frontend:
 
 ```sh
+cd ../frontend
+cp .sample.env .env
+```
+
+Change back to the project root and start the Docker container
+
+```sh
+cd ..
 docker compose up
 ```
 
