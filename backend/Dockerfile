@@ -10,13 +10,15 @@ WORKDIR /
 
 COPY package.json ./
 
+# do installs
+# NOTE: do the TS compilation outside of the container build / dock comp up
+#   ie: yarn tsc, before running dock comp up
+#   https://stackoverflow.com/a/60916422/16824901
+
 RUN yarn
 
 COPY . .
 
 EXPOSE 4000
 
-# RUN yarn tsc
-
-# CMD [ "yarn", "start"]
-CMD yarn tsc; yarn start:deploy
+CMD yarn start:docker
