@@ -1,5 +1,5 @@
 
-// types for the entire code challenge project (frontend and backend)
+// types for the entire project (frontend and backend)
 
 // what we expect from the API
 //    interface, because maybe someday it needs to be composed later into something bigger
@@ -25,7 +25,7 @@ type ApiMessage = {
   type: string,
   text: string,
   info: ApiMessageInfo,
-  rateLimit: ApiRateLimit
+  ratelimit: ApiRateLimit
 }
 
 type ApiMessageInfo = {
@@ -79,5 +79,5 @@ type EstimateMessage = {
   type: string,
   text: string,
   info: ApiMessageInfo,
-  rateLimit: ApiRateLimit
+  ratelimit: ApiRateLimit
 }

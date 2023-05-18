@@ -1,23 +1,22 @@
 
-var express = require('express');
-var router = express.Router();
+const router = require('express').Router();
 
-var axios = require('axios');
+const axios = require('axios');
 
 import { Estimate, ApiError } from '../../types/'
 import { transformRecord } from '../util/functions'
 
 // jump up three directories because we are actually running the compiled TS code in the 'dist' folder. 
-const mockData = require('../../../mock_data/estimate.js')
 
 module.exports = (app: any) => {
   app.use('/', router);
 
   // GET seems more intuitive / appropriate, but we should use POST.
   //    we POST from the UI, but we GET from the API. Maybe we will
-  //      send vars from the UI, in the future.
+  //      send vars from the UI, in the future. 
+  //      Using POST now makes that easier, later.
   router.post('/', async (req: any, res: any) => {
-    var config = {
+    const config = {
       method: "get",
       url: process.env.DNS_API_URL,
       headers: {

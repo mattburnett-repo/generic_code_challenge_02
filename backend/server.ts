@@ -1,6 +1,6 @@
 
-var express = require('express');
-var server = express();
+const express = require('express');
+const server = express();
 
 // get everything the server needs in order to run.
 const loaders = require('./loaders/');

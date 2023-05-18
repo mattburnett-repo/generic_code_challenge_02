@@ -1,17 +1,15 @@
-import "../index.css"
+import '../index.css'
 
-const FormDisplay = ({ submitHandler }: any) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
+const FormDisplay = ({submitHandler}: any) => {
   return (
-    <div className="app-container">
-      <div className="app-title">Generic Code Challenge 02</div>
-      <div className="app-panel">
+    <div className='app-container'>
+      <div className='app-title'>PV Estimate</div>
+      <div className='app-panel'>
         <form onSubmit={submitHandler}>
           <div
-            className="app-input"
-            role="presentation"
-            aria-label="description-text"
+            className='app-input'
+            role='presentation'
+            aria-label='description-text'
           >
             This app receives a solar production estimate for 52° north, 12°
             east, <br />
@@ -19,8 +17,8 @@ const FormDisplay = ({ submitHandler }: any) => {
             with 5.67 kWp. <br />
             The estimates are in hourly increments.
           </div>
-          <div className="app-input">
-            <button type="submit" name="search-button" className="btn-app">
+          <div className='app-input'>
+            <button type='submit' name='search-button' className='btn-app'>
               Get Estimate
             </button>
           </div>
